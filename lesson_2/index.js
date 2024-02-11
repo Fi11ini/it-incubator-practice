@@ -12,14 +12,14 @@ const playlist = {
             artistName: "Eminem",
             title: "Rap God",
             fileUrl: "eminem_-_8-mile.mp3",
-            isHot: false,
+            inTrend: false,
         },
         {
             coverImageUrl: "track2.png",
             artistName: "50cent",
             title: "In da Club",
             fileUrl: "50-cent_-_in-da-club.mp3",
-            isHot: true,
+            inTrend: true,
         },
     ],
 };
@@ -29,12 +29,64 @@ const playlist = {
 renderPlaylist(playlist)
 
 function renderPlaylist(playlistForRendering) {
-    const playlistElement = document.createElement('h2');
-    playlistElement.append('playlist will be here');
-    document.body.append(playlistElement);
+    renderPlaylistHeader(playlistForRendering);
+    renderPlaylistTracks(playlistForRendering);
+
 }
 
-/test
+
+function renderPlaylistHeaderTitle(playlistForRendering) {
+    const playlistTitleElement = document.createElement('h2');
+    playlistTitleElement.append(playlistForRendering.title);
+    document.body.append(playlistTitleElement);
+}
+
+function renderPlaylistHeaderCover(playlistForRendering) {
+    const coverElement = document.createElement('img');
+    coverElement.src = playlistForRendering.coverImageUrl
+    document.body.append(coverElement)
+}
+
+function renderPlaylistHeader(playlistForRendering) {
+    renderPlaylistHeaderTitle(playlistForRendering);
+    renderPlaylistHeaderCover(playlistForRendering);
+
+}
+
+function renderPlaylistTracks(playlistForRendering) {
+    renderPlaylistTrack(playlistForRendering.tracks[0]);
+    renderPlaylistTrack(playlistForRendering.tracks[1]);
+}
+
+function renderPlaylistTrack(inputTrackForRendering) {
+    const trackElement = document.createElement('div');
+
+    const coverElement = document.createElement('img');
+    coverElement.src = inputTrackForRendering.coverImageUrl
+    document.body.append(coverElement);
+    trackElement.append(coverElement);
+
+    const trackTitleElement = document.createElement('div');
+    if (inputTrackForRendering.inTrend) {
+        trackTitleElement.append('🔥')
+    }
+
+    trackTitleElement.append(inputTrackForRendering.artistName + ' - ' + inputTrackForRendering.title);
+    trackElement.append(trackTitleElement);
+
+    const audioElement = document.createElement('audio');
+    audioElement.src = inputTrackForRendering.fileUrl;
+    audioElement.controls = true;
+    document.body.append(audioElement);
+    trackElement.append(audioElement);
+
+
+    document.body.append(trackElement)
+
+
+
+}
+
 
 
 
