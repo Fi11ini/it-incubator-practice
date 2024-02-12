@@ -1,5 +1,5 @@
 // data
-const playlist = {
+const playlists = [{
     title: "Hip-Hop Hits",
     coverImageUrl: "cover.png",
     info: {
@@ -22,15 +22,23 @@ const playlist = {
             inTrend: true,
         },
     ],
-};
+}]
 
 
 // render
-renderPlaylist(playlist)
+
+renderPlaylists(playlists);
+function renderPlaylists(inputPlaylists) {
+    for (let i = 0; i < inputPlaylists.length; i++) {
+        const playlist = inputPlaylists[i];
+        renderPlaylist(playlist)
+    }
+}
+
 
 function renderPlaylist(playlistForRendering) {
     renderPlaylistHeader(playlistForRendering);
-    renderPlaylistTracks(playlistForRendering);
+    renderPlaylistTracks(playlistForRendering.tracks);
 
 }
 
@@ -53,9 +61,11 @@ function renderPlaylistHeader(playlistForRendering) {
 
 }
 
-function renderPlaylistTracks(playlistForRendering) {
-    renderPlaylistTrack(playlistForRendering.tracks[0]);
-    renderPlaylistTrack(playlistForRendering.tracks[1]);
+function renderPlaylistTracks(tracks) {
+    for (let i = 0; i < tracks.length; i++) {
+        const track = tracks[i];
+        renderPlaylistTrack(track);
+    }
 }
 
 function renderPlaylistTrack(inputTrackForRendering) {
